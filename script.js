@@ -5,7 +5,7 @@ class SwarmEntity {
         this.directionAngle = directionAngle != undefined ? directionAngle : parseFloat((Math.random() * 2 * Math.PI).toFixed(10));
         this.objective = objective != undefined ? objective : 0;
         this.objectivesApproximateDistance = objectivesApproximateDistance != undefined ? objectivesApproximateDistance : [];
-        this.speed = speed != undefined ? speed : (Math.random() * (0.85 - 0.35) + 0.35);
+        this.speed = speed != undefined ? speed : .1;
         this.connectedRoad = connectedRoad;
     }
 }
@@ -55,14 +55,14 @@ class Swarm {
         this.plane = {
             xMin: 0,
             yMin: 0,
-            xMax: 100,
-            yMax: 100,
+            xMax: 10,
+            yMax: 10,
             collideWalls: true
         };
         this.objective = {
             hitbox: {
-                width: 10,
-                height: 10
+                width: .1,
+                height: .1
             },
             cooldownFrames: 1,
             speed: 0
