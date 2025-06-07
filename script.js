@@ -33,11 +33,11 @@ class SwarmBarrier {
 }
 
 class Swarm {
-    constructor() {
-        this.entities = [];
-        this.objectives = [];
+    constructor(mapWidth = 10, mapHeight = 10, entities = null, objectives = null, barriers = null) {
+        this.entities = entities || [];
+        this.objectives = objectives || [];
+        this.barriers = barriers || [];
         this.connections = [];
-        this.barriers = [];
         this.roads = [];
         this.movingByRoads = false;
         this.firstPointFound = false;
@@ -55,8 +55,8 @@ class Swarm {
         this.plane = {
             xMin: 0,
             yMin: 0,
-            xMax: 10,
-            yMax: 10,
+            xMax: mapWidth,
+            yMax: mapHeight,
             collideWalls: true
         };
         this.objective = {
