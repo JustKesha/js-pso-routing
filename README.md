@@ -41,3 +41,26 @@ console.log((arr => [
 ```
 Iteration 0: `[5, 5]`
 Iteration 30: `[1.0845236605545332, 1.1649163955747983]`
+
+### Explanation
+
+Each particle of the swarm holds the following information:
+1. Approximate distance to each target point
+1. Current target point id
+1. Direction angle
+1. Speed
+
+At the start the approximate distance to each point should be random or null.<br>
+Then each iteration a particle will:
+1. Increase the points distance by N
+1. Communicate with the neighbors
+1. Update direction
+1. Take a step forward
+1. See if it reached a target
+
+Communication means sharing informations with the neighboring particles to find out who has lesser distance to point X stored.
+The particles then update their point distances to be the smallest values among their neighbors + the distance to that neighbor.
+And if the information about their current target was updated, they will rotate in the direction of the neighbor who shared that information.
+
+Once a particle reaches a point it will update the distance to that point to be 0,<br>
+And if it was the current target it will switch to the next.
