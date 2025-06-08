@@ -33,7 +33,8 @@ class SwarmBarrier {
 }
 
 class Swarm {
-    constructor(mapWidth = 10, mapHeight = 10, entities = null, objectives = null, barriers = null) {
+    constructor( mapWidth = 10, mapHeight = 10, communicationRadius = null, entities = null, objectives = null,
+        barriers = null, firstFrameStill = true, firstFrameDoubl = true ) {
         this.entities = entities || [];
         this.objectives = objectives || [];
         this.barriers = barriers || [];
@@ -41,6 +42,8 @@ class Swarm {
         this.roads = [];
         this.movingByRoads = false;
         this.firstPointFound = false;
+        this.firstFrameStill = firstFrameStill;
+        this.firstFrameDoubl = firstFrameDoubl;
 
         this.entity = {
             hitbox: {
@@ -49,7 +52,7 @@ class Swarm {
             },
             collision: true,
             logConnections: false,
-            communicationRadius: 25,
+            communicationRadius: communicationRadius || 25,
             onlyLogGoodConnections: false,
         };
         this.plane = {
@@ -67,6 +70,7 @@ class Swarm {
             cooldownFrames: 1,
             speed: 0
         }
+        this.isFirstFrame = true;
 
         this.entityAngleChangeChance = .25;
         this.entityAngleChangeMultiplier = .25;
@@ -290,8 +294,10 @@ class Swarm {
                 }
             }
 
-            entity.x = nextEntityPos.x;
-            entity.y = nextEntityPos.y;
+            if(!(this.firstFrameStill && this.isFirstFrame)) {
+                entity.x = nextEntityPos.x;
+                entity.y = nextEntityPos.y;
+            }
 
             [entity.x, entity.y, entity.directionAngle] = this.wallsCollision(entity.x, entity.y, entity.directionAngle, this.entity.hitbox.width, this.entity.hitbox.height);
         }
@@ -343,5 +349,11 @@ class Swarm {
                 }
             }
         }
+        
+        let wasFirstFrame = this.isFirstFrame;
+        this.isFirstFrame = false;
+
+        if(wasFirstFrame && this.firstFrameDoubl)
+            this.frame();
     }
 }
