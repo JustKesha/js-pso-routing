@@ -1,5 +1,10 @@
 # 🗺️ Routing by PSO - JS
 
+[Overview](#overview) |
+[Usage](#usage) |
+[Explanation](#explanation) |
+[Website](https://justkesha.github.io/routing-by-pso)
+
 ### Overview
 
 This is a simple script written JavaScript that helps solve routing problems using [particle swarm optimization](https://en.wikipedia.org/wiki/Particle_swarm_optimization),<br>
